@@ -1,0 +1,245 @@
+/*
+ * LocalCryptos Wallet Backup Explorer
+ * Copyright (C) 2020 LocalEthereum Pty Ltd
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.WalletBackupExplorer {
+  text-align: center;
+}
+.WalletBackupExplorer {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: 17px;
+  color: white;
+  width: 100%;
+}
+
+.Steps {
+  display: flex;
+  min-height: 100vh;
+}
+.Steps > div {
+  flex: 1;
+  padding: 0 30px;
+  height: 100%;
+  min-height: 100vh;
+  transition: flex-grow 0.5s;
+}
+.Steps > :not(.active) {
+  background: white;
+  color: #555;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.Steps > .active {
+  background: #7F58D3;
+  color: white;
+  flex: 2;
+}
+.Steps > .active:not(:nth-child(3)) p {
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.Steps > :nth-child(3).active {
+  flex: 6;
+  background: white;
+  color: #333;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.Steps h2 {
+  font-size: 20px;
+  position: relative;
+  padding-top: 50px;
+}
+.Steps h2::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.Steps > :nth-child(1) > h2::before { content: '1'; }
+.Steps > :nth-child(2) > h2::before { content: '2'; }
+.Steps > :nth-child(3) > h2::before { content: '3'; }
+.Steps p {
+  font-size: 17px;
+}
+
+.SearchBar {
+  width: 100%;
+}
+.SearchBar input {
+  width: 100%;
+  display: block;
+  padding: 10px 20px;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  border-radius: 6px;
+  font-size: 15px;
+  border: none;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s ease-in-out;
+  border-bottom: 2px solid transparent;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-bottom: 3px;
+}
+.SearchBar input:focus {
+  outline: 0;
+  border-color: #7F58D3;
+}
+
+.ResultsTable {
+  margin-top: 20px;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: 13px;
+  width: 100%;
+  border-collapse: collapse;
+}
+.ResultsTable tr td, .ResultsTable tr th {
+  padding: 0 5px;
+  line-height: 1.4em;
+  text-align: left;
+}
+.ResultsTable tr td:last-child, .ResultsTable tr th:last-child {
+  text-align: center;
+}
+.ResultsTable tbody tr:first-child td {
+  padding-bottom: 5px;
+}
+.ResultsTable tbody tr:first-child td:not(:last-child) {
+  color: #aaa;
+}
+.ResultsTable tr th {
+  padding-bottom: 10px;
+}
+.ResultsTable tr:hover td {
+  background: #eee;
+}
+
+.ResultsTableContainer {
+  overflow-y: scroll;
+  flex: 1;
+}
+
+.Steps > :nth-child(3).active {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100vh;
+}
+
+.ResultsGenerating {
+  margin-top: 0;
+  border-top: 2px solid #eee;
+  background: white;
+  padding: 9px 0 5px 0;
+  line-height: normal;
+  min-height: 28px;
+}
+.ResultsGenerating button, .ExportAllButton {
+  box-sizing: border-box;
+  border: none;
+  background: none;
+  color: #7F58D3;
+  font-weight: 600;
+  display: inline-block;
+  cursor: pointer;
+}
+.ResultsGenerating button:focus, .ExportAllButton:focus {
+  outline: 0;
+}
+.ResultsGenerating, .ResultsGenerating button {
+  font-size: 16px;
+}
+
+.TokenButtons {
+  margin-top: 30px;
+}
+.TokenButtons button {
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: left 20px center;
+  background-size: 35px 35px;
+  box-sizing: border-box;
+  border: none;
+  display: block;
+  text-align: left;
+  font-size: 20px;
+  border-radius: 8px;
+  padding: 20px 10px 20px 70px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  min-width: 200px;
+  cursor: pointer;
+}
+.TokenButtons button:focus {
+  outline: none;
+}
+.TokenButtons button.active {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+.TokenButtons:not(.TokenButtonsActive) button {
+  font-size: 17px;
+  min-width: 180px;
+  padding: 15px 10px 15px 60px;
+  background-position: left 10px center;
+}
+
+
+.UploadButton {
+  background: url('./images/UploadIcon.svg');
+  background-repeat: no-repeat;
+  background-position: top center;
+  display: block;
+  margin: 40px auto 0 auto;
+  background-size: 175px 175px;
+  min-width: 175px;
+  cursor: pointer;
+  padding-top: 190px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.UploadButton input {
+  display: none;
+}
+
+.CopyButton {
+  background: url('./images/CopyIcon.svg');
+  background-repeat: no-repeat;
+  background-size: 10px 10px;
+  width: 10px;
+  height: 10px;
+  box-sizing: border-box;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+}
+.CopyButton:hover {
+  opacity: 0.5;
+}
+.CopyButton:focus {
+  outline: 0;
+}
+
+.WalletDetails {
+  margin-top: 30px;
+  background: url('./images/CheckMark.svg');
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  background-position: top center;
+  padding-top: 30px;
+}

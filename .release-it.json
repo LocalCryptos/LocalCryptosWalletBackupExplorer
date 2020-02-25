@@ -1,0 +1,22 @@
+{
+  "git": {
+    "requireBranch": "master"
+  },
+  "hooks": {
+    "before:init": [
+      "npm run lint"
+    ],
+    "before:bump": [
+      "npm run build",
+      "npm run package"
+    ]
+  },
+  "github": {
+    "release": true,
+    "assets": ["dist/*"],
+    "draft": true
+  },
+  "npm": {
+    "publish": false
+  }
+}

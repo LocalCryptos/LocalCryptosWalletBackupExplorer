@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="70px" height="70px" viewBox="0 0 70 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Cryptos/ETH</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Cryptos/ETH" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ethereum_logo" transform="translate(14.000000, 1.500000)" fill="#5551A2" fill-rule="nonzero">
+            <polygon id="path3078" opacity="0.60000598" points="20.5512665 24.7587289 0 34.0998095 20.5512665 46.2476049 41.1025331 34.0998095"></polygon>
+            <polygon id="path3094" opacity="0.44999701" points="0.000164512397 34.0996405 20.551431 46.247436 20.551431 24.7585599 20.551431 0"></polygon>
+            <polygon id="path3110" opacity="0.80000299" points="20.5512665 0 20.5512665 24.7585599 20.5512665 46.247436 41.1025331 34.0996405"></polygon>
+            <polygon id="path3126" opacity="0.44999701" points="0.000164512397 37.9966946 20.551431 66.9569901 20.551431 50.1383764"></polygon>
+            <polygon id="path3142" opacity="0.80000299" points="20.5512665 50.1385988 20.5512665 66.9572124 41.1147603 37.9969169"></polygon>
+        </g>
+    </g>
+</svg>
