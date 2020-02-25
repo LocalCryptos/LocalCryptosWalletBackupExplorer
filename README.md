@@ -12,10 +12,12 @@ Confused by the unusual JSON file? 🤷️️
 
 ## How do I use this?
 
-1. Insert your wallet backup
-2. Select which crypto you want to export
-3. View a list of all your addresses
-4. Export the private keys you pick (or dump all them all)
+1. **Download the latest release from [here](https://github.com/LocalCryptos/LocalCryptosWalletBackupExplorer/releases)**
+2. Extract the archive, open `index.html` in your web browser
+3. Insert your wallet backup
+4. Select which crypto you want to export
+5. View a list of all your addresses
+6. Export the private keys you pick (or dump all them all)
 
 ## Is this safe?
 
