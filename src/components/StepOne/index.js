@@ -34,7 +34,25 @@ class StepOne extends React.PureComponent {
               throw new Error('Backup was malformed.');
             }
             if (!Array.isArray(object)) {
-              // Old format
+              // Old format; transform to the new format
+              if (typeof object.export !== 'object') {
+                throw new Error('Export details missing.');
+              }
+              if (typeof object.wallet !== 'object') {
+                throw new Error('Wallet details missing.');
+              }
+              if (typeof object.wallet.version !== 'string') {
+                throw new Error('Backup version missing.');
+              }
+              if (typeof object.export.created_at !== 'string') {
+                throw new Error('Backup timestamp missing.');
+              }
+              object.token = 'ETH';
+              object.export.wallet_version = object.wallet.version;
+              object.export.timestamp = Math.round(Date.parse(object.export.created_at) / 1000);
+              delete object.export.version;
+              delete object.export.created_at;
+              delete object.wallet;
               object = [object];
             }
             object.forEach((wallet, i) => {
