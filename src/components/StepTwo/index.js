@@ -20,6 +20,9 @@ import React from 'react';
 
 import BTC from './BTC.svg';
 import ETH from './ETH.svg';
+import LTC from './LTC.svg';
+import DASH from './DASH.svg';
+import BCH from './BCH.svg';
 
 class StepTwo extends React.PureComponent {
   onClick = (token) => () => this.props.onSelect(token)
@@ -42,6 +45,9 @@ class StepTwo extends React.PureComponent {
                   backgroundImage: `url(${{
                     BTC,
                     ETH,
+                    LTC,
+                    DASH,
+                    BCH,
                   }[wallet.token]})`,
                 }}
                 className={this.props.token === wallet.token ? 'active' : undefined}
@@ -49,6 +55,9 @@ class StepTwo extends React.PureComponent {
                 {{
                   BTC: 'Bitcoin',
                   ETH: 'Ethereum',
+                  LTC: 'Litecoin',
+                  DASH: 'Dash',
+                  BCH: 'Bitcoin Cash',
                 }[wallet.token]}
               </button>
             ))}

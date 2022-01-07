@@ -1,8 +1,10 @@
 {
   "name": "@localcryptos/wallet-backup-explorer",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "dependencies": {
-    "bitcoinjs-lib": "^5.1.7",
+    "bitcoinjs-lib": "5.2.0",
+    "cashaddrjs": "^0.4.4",
+    "coininfo": "5.1.0",
     "copy-to-clipboard": "^3.3.1",
     "crypto-js": "^4.0.0",
     "eslint": "^6.8.0",

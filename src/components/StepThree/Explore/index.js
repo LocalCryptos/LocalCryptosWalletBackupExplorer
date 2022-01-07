@@ -1,6 +1,6 @@
 /*
  * LocalCryptos Wallet Backup Explorer
- * Copyright (C) 2020 LocalEthereum Pty Ltd
+ * Copyright (C) 2022 LocalEthereum Pty Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -20,6 +20,8 @@ import React from 'react';
 import CryptoJS from 'crypto-js';
 import * as ethereumjsUtil from 'ethereumjs-util';
 import * as bitcoinJsLib from 'bitcoinjs-lib';
+import coininfo from 'coininfo';
+import cashaddr from 'cashaddrjs';
 import wif from 'wif';
 import { publicKeyCreate } from 'secp256k1';
 import { saveAs } from 'file-saver';
@@ -94,7 +96,7 @@ class Explore extends React.Component {
     }
     this.setState({
       generating: true,
-    })
+    });
     try {
       const getPrivateKeyFromChainKey = (chainKey) => {
         return CryptoJS.HmacSHA256(chainKey, CryptoJS.enc.Hex.parse('0001'));
@@ -103,36 +105,91 @@ class Explore extends React.Component {
         return CryptoJS.HmacSHA256(chainKey, CryptoJS.enc.Hex.parse('02'));
       };
       const formatAddress = (privateKey) => {
-        switch (this.props.token) {
-        case 'ETH': {
-          const publicKey = ethereumjsUtil.privateToPublic(Buffer.from(wordArrayToByteArray(privateKey)));
-          const address = ethereumjsUtil.publicToAddress(publicKey);
-          return `0x${address.toString('hex')}`;
-        }
-        case 'BTC': {
-          const publicKey = Buffer.from(publicKeyCreate(Buffer.from(wordArrayToByteArray(privateKey)), true));
-          const payment = bitcoinJsLib.payments.p2sh({
-            redeem: bitcoinJsLib.payments.p2wpkh({
-              pubkey: publicKey,
+        try {
+          switch (this.props.token) {
+          case 'ETH': {
+            const publicKey = ethereumjsUtil.privateToPublic(Buffer.from(wordArrayToByteArray(privateKey)));
+            const address = ethereumjsUtil.publicToAddress(publicKey);
+            return `0x${address.toString('hex')}`;
+          }
+          case 'BTC': {
+            const publicKey = Buffer.from(publicKeyCreate(Buffer.from(wordArrayToByteArray(privateKey)), true));
+            const payment = bitcoinJsLib.payments.p2sh({
+              redeem: bitcoinJsLib.payments.p2wpkh({
+                pubkey: publicKey,
+                network: bitcoinJsLib.networks.bitcoin,
+              }),
               network: bitcoinJsLib.networks.bitcoin,
-            }),
-            network: bitcoinJsLib.networks.bitcoin,
-          });
-          return payment.address;
-        }
-        default:
-          return '???';
+            });
+            return payment.address;
+          }
+          case 'LTC': {
+            const publicKey = Buffer.from(publicKeyCreate(Buffer.from(wordArrayToByteArray(privateKey)), true));
+            const network = coininfo.litecoin.main.toBitcoinJS();
+            const payment = bitcoinJsLib.payments.p2sh({
+              redeem: bitcoinJsLib.payments.p2wpkh({
+                pubkey: publicKey,
+                network,
+              }),
+              network,
+            });
+            return payment.address;
+          }
+          case 'DASH': {
+            const publicKey = Buffer.from(publicKeyCreate(Buffer.from(wordArrayToByteArray(privateKey)), true));
+            const network = coininfo.dash.main.toBitcoinJS();
+            const payment = bitcoinJsLib.payments.p2pkh({
+              pubkey: publicKey,
+              network,
+            });
+            return payment.address;
+          }
+          case 'BCH': {
+            const publicKey = Buffer.from(publicKeyCreate(Buffer.from(wordArrayToByteArray(privateKey)), false));
+            const hash160 = Buffer.from(bitcoinJsLib.crypto.hash160(publicKey));
+            return cashaddr.encode('bitcoincash', 'P2PKH', hash160);
+          }
+          default:
+            return '???';
+          }
+        } catch (err) {
+          return err.message;
         }
       }
       const formatPrivateKey = (privateKey) => {
         switch (this.props.token) {
-        case 'BTC':
+        case 'BTC': {
           const keyWIF = wif.encode({
-            version: 128,
+            version: coininfo.bitcoin.main.versions.private,
             privateKey: Buffer.from(wordArrayToByteArray(privateKey)),
             compressed: true,
           });
           return `p2wpkh-p2sh:${keyWIF}`;
+        }
+        case 'LTC': {
+          const keyWIF = wif.encode({
+            version: coininfo.litecoin.main.versions.private,
+            privateKey: Buffer.from(wordArrayToByteArray(privateKey)),
+            compressed: true,
+          });
+          return `p2wpkh-p2sh:${keyWIF}`;
+        }
+        case 'DASH': {
+          const keyWIF = wif.encode({
+            version: coininfo.dash.main.versions.private,
+            privateKey: Buffer.from(wordArrayToByteArray(privateKey)),
+            compressed: true,
+          });
+          return `p2pkh:${keyWIF}`;
+        }
+        case 'BCH': {
+          const keyWIF = wif.encode({
+            version: coininfo.bitcoincash.main.versions.private,
+            privateKey: Buffer.from(wordArrayToByteArray(privateKey)),
+            compressed: false,
+          });
+          return `p2pkh:${keyWIF}`;
+        }
         default:
           return CryptoJS.enc.Hex.stringify(privateKey);
         }
@@ -219,8 +276,8 @@ class Explore extends React.Component {
             <thead>
               <tr>
                 <th>N</th>
-                <th>Address</th>
-                <th>Seed</th>
+                <th>{this.props.token} Address</th>
+                <th>Private Key</th>
               </tr>
             </thead>
             <tbody>
