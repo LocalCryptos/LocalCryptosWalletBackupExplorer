@@ -32,7 +32,7 @@ class StepTwo extends React.PureComponent {
         <h2>Select wallet</h2>
         {!this.props.token ? (
           <p>
-            Choose which crypto you want to look at.
+            Choose which crypto asset you want to recover.
           </p>
         ) : null}
         {this.props.backupObject ? (

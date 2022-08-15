@@ -56,7 +56,7 @@ function wordArrayToByteArray(wordArray, length) {
   return [].concat.apply([], result);
 }
 
-class Explore extends React.Component {
+class ExploreAddresses extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -285,7 +285,7 @@ class Explore extends React.Component {
                 ? (
                   <tr>
                     <td>0-{addresses.length - cropAddresses - 1}</td>
-                    <td>(hidden)</td>
+                    <td>(hidden in this view)</td>
                     <td>
                       <button className="ExportAllButton" onClick={this.onClickExportAll}>Export all</button>
                     </td>
@@ -338,4 +338,4 @@ class Explore extends React.Component {
   }
 }
 
-export default Explore;
+export default ExploreAddresses;

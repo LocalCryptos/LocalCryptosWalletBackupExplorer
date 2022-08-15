@@ -46,9 +46,10 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 .Steps > .active {
-  background: #7F58D3;
+  background: #222;
   color: white;
   flex: 2;
+  overflow-y: scroll;
 }
 .Steps > .active:not(:nth-child(3)) p {
   max-width: 360px;
@@ -242,4 +243,184 @@
   background-size: 20px 20px;
   background-position: top center;
   padding-top: 30px;
+}
+
+.ExploreModes {
+  display: flex;
+}
+
+
+.ExploreModes > div {
+  padding: 20px;
+  margin: 5px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  flex: 1;
+  cursor: pointer;
+}
+.ExploreModes > div p {
+  font-size: 15px;
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+a {
+  color: #7F58D3;
+  font-weight: 600;
+  text-decoration: none;
+}
+a:hover {
+  opacity: 0.7;
+}
+.ExploreModes > div h3 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.backToModes {
+  margin: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-size: 600;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border: none;
+  outline: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.ExploreEscrowStep {
+  padding: 15px;
+  margin: 5px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  margin-top: 22px;
+}
+.ExploreEscrowStep:last-child {
+  margin-bottom: 60px;
+}
+.ExploreEscrowStep > div:first-child {
+  font-weight: 600;
+  font-size: 15px;
+}
+.ExploreEscrowStep > div:not(:first-child) {
+  font-size: 14px;
+}
+.ExploreEscrowStep > div:last-child:not(:nth-child(2)):not(.TXData) {
+  font-size: 14px;
+  display: inline-block;
+  margin-left: 10px;
+}
+.ExploreEscrowStep > button {
+  display: inline-block;
+}
+
+.escrowUTXOTable {
+  font-size: 13px;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.escrowUTXOTable tr td {
+  border: none;
+}
+.escrowUTXOTable tr td {
+  border-top: 1px solid #eee;
+  padding: 3px 8px;
+}
+.escrowUTXOTable tr td:not(:first-child) {
+  border-left: 1px solid #eee;
+}
+
+.recipientAddress {
+  font-size: 14px;
+  margin-top: 8px;
+}
+.recipientAddress label {
+  font-weight: 600;
+  display: block;
+}
+.recipientAddress input {
+  width: 400px;
+  padding: 5px 10px;
+  margin-bottom: 15px;
+  margin-top: 3px;
+}
+
+
+.TXData h3 {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+.TXData p {
+  font-size: 15px;
+  margin: 0;
+  margin-bottom: 10px;
+}
+.TXData pre {
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
+  font-size: 11px;
+  line-height: 14px;
+  margin: 0;
+  padding: 20px;
+  background: #333;
+  color: #eee;
+}
+
+.SettleUTXO {
+  border: 4px solid #777;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 10px;
+  margin-top: 10px;
+}
+.SettleUTXO table {
+  width: 100%;
+  margin-top: 10px;
+}
+.SettleUTXO tr td:first-child {
+  white-space: nowrap;
+  font-weight: 600;
+}
+.SettleUTXO pre {
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
+  font-size: 8px;
+  line-height: 14px;
+  margin-bottom: 4px;
+}
+.SettleUTXO pre + pre, .SettleUTXO code {
+  margin-top: 0;
+  font-size: 11px;
+  font-style: italic;
+  word-wrap: normal;
+  word-break: normal;
+}
+.SettleUTXO input[type="text"] {
+  display: block;
+  width: 100%;
+}
+.SettleUTXO .settlementData {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.EthereumEscrowInstructions, .EthereumEscrowInstructions p {
+  text-align: left;
+  font-size: 15px;
+  line-height: 25px;
+}
+.EthereumEscrowInstructions li {
+  margin-bottom: 10px;
+}
+.EthereumEscrowInstructions ol, .EthereumEscrowInstructions ul {
+  margin-top: 5px;
+}
+.EthereumEscrowInstructions code {
+  font-weight: 600;
 }

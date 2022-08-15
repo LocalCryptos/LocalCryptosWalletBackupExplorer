@@ -17,27 +17,101 @@
  */
 
 import React from 'react';
-import Explore from './Explore';
+import ExploreAddresses from './ExploreAddresses';
+import ExploreEscrow from './ExploreEscrow';
+import EthereumEscrowInstructions from './EthereumEscrowInstructions';
 
-class StepThree extends React.PureComponent {
+class StepThree extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mode: null,
+    };
+  }
+  selectMode = (mode) => () => this.setState({ mode })
   render() {
+    if (!this.props.token) {
+      return (
+        <>
+          <h2>Explore</h2>
+          <p>
+            Recover crypto from your wallet or escrow accounts.
+          </p>
+        </>
+      );
+    }
+    if (!this.state.mode) {
+      return (
+        <>
+          <h2>Explore</h2>
+          <p>
+            Please select the mode you wish to recover:
+          </p>
+          <div className="ExploreModes">
+            <div onClick={this.selectMode('addresses')}>
+              <h3>Wallet addresses</h3>
+              <p>
+                Get the private keys to your ordinary self-custodial wallet addresses. This is where you would have transferred crypto to from your own wallet.
+              </p>
+              <p>
+                You can import these private keys into a third party wallet to recover the balance in each address.
+              </p>
+            </div>
+            <div onClick={this.selectMode('escrow')}>
+              <h3>Unsettled escrow contracts</h3>
+              <p>
+                Recover funds from non-custodial escrow accounts.
+              </p>
+              {this.props.token === 'ETH'
+                ? (
+                  <p>
+                    ETH in peer-to-peer escrow accounts is held in an Ethereum smart contract. We will give you instructions on how to interact with the contract directly using a wallet such as MetaMask.
+                  </p>
+                )
+                : this.props.token === 'BCH' ? (
+                  <p>
+                    Bitcoin Cash escrow accounts are held in P2SH smart contract addresses. They cannot be imported directly into ordinary crypto wallets.
+                    To learn how these decentralized "OP_CHECKDATASIG" escrow accounts work, read <a rel="noopener noreferrer" target="_blank" href="https://blog.localcryptos.com/bitcoin-cash-trading-begins/">our blog post on the topic</a>.
+                  </p>
+                )
+                  : (
+                    <p>
+                      {this.props.token} escrow accounts are held in P2SH smart contract addresses. They cannot be imported directly into ordinary crypto wallets.
+                      To learn how these decentralized escrow accounts work, read <a rel="noopener noreferrer" target="_blank" href="https://blog.localcryptos.com/how-bitcoin-escrow-works/">our blog post on the topic</a>.
+                    </p>
+                  )
+              }
+            </div>
+          </div>
+        </>
+      );
+    }
     return (
       <>
-        <h2>Explore</h2>
-        {!this.props.active
-          ? (
-            <>
-              <p>
-                Print a list of addresses and their private keys.
-              </p>
-            </>
-          )
-          : (
-            <Explore
+        <h2>Explore: {this.state.mode === 'addresses' ? 'Wallet addresses' : 'Crypto in escrow contracts'}</h2>
+        <div>
+          <button className="backToModes" onClick={this.selectMode(null)}>
+            Back to mode selection
+          </button>
+        </div>
+        {
+          this.state.mode === 'addresses' ? (
+            <ExploreAddresses
               token={this.props.token}
               wallet={this.props.backupObject.find(wallet => wallet.token === this.props.token)}
             />
           )
+            : null
+        }
+        {
+          this.state.mode === 'escrow' && this.props.token === 'ETH' ? <EthereumEscrowInstructions />
+            : this.state.mode === 'escrow' ? (
+              <ExploreEscrow
+                token={this.props.token}
+                backupObject={this.props.backupObject}
+              />
+            )
+              : null
         }
       </>
     );

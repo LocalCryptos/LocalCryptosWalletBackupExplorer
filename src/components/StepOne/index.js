@@ -118,7 +118,8 @@ class StepOne extends React.PureComponent {
         <div style={{ fontSize: '15px', fontWeight: 600, marginBottom: '8px' }}>
           {`LocalCryptos V${this.props.backupObject[0].export.wallet_version}`}
         </div>
-        <small>Created {backupDate.toLocaleDateString('en-US')}</small>
+        <small>Created {backupDate.toLocaleDateString('en-US')}</small><br/>
+        <small>{this.props.backupObject.map(item => item.token).join(', ')}</small>
       </div>
     );
   }

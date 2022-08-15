@@ -2,6 +2,7 @@
   "name": "@localcryptos/wallet-backup-explorer",
   "version": "1.1.1",
   "dependencies": {
+    "@bitgo/utxo-lib": "^2.4.1",
     "bitcoinjs-lib": "5.2.0",
     "cashaddrjs": "^0.4.4",
     "coininfo": "5.1.0",

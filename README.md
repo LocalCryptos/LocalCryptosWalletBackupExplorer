@@ -2,26 +2,23 @@
 
 Have you forgotten your LocalCryptos password? 🤔
 
-Left crypto in your wallet? 😨
+Left crypto in your non-custodial wallet or in escrow? 😨
+
+Or just want to settle a non-custodial escrow contract without LocalCryptos' UI? 🦸
 
 Do you have a wallet backup file? 💾
-
-Confused by the unusual JSON file? 🤷️️
-
-*This tool will make your day!* 🦸
 
 ## How do I use this?
 
 1. **Download the latest release from [here](https://github.com/LocalCryptos/LocalCryptosWalletBackupExplorer/releases)**
 2. Extract the archive, open `index.html` in your web browser
 3. Insert your wallet backup
-4. Select which crypto you want to export
-5. View a list of all your addresses
-6. Export the private keys you pick (or dump all them all)
+4. Select which crypto you want to recover
+5. Export your private keys or unlock non-custodial escrow accounts
 
 ## Is this safe?
 
-This tool will not upload your private key anywhere. The cryptography is done inside your browser.
+This tool will not upload your private key anywhere. The cryptography is done *inside your browser*.
 
 ## What format is the backup file in?
 
