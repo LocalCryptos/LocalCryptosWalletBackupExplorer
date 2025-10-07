@@ -9,7 +9,7 @@
     "copy-to-clipboard": "^3.3.3",
     "crypto-js": "^4.2.0",
     "eslint": "^6.8.0",
-    "eslint-config-react-app": "^5.2.0",
+    "eslint-config-react-app": "^5.2.1",
     "ethereumjs-util": "^6.2.0",
     "file-saver": "^2.0.5",
     "react": "^16.12.0",
